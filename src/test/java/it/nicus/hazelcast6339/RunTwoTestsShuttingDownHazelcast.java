@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @DirtiesContext // Just make sure Spring is not caching the ApplicationContext
-public class RunTwoTestsShuttingDownHazelcast_Fails {
+public class RunTwoTestsShuttingDownHazelcast {
     static final Logger LOG = LoggerFactory.getLogger("TEST");
 
     static int countShutdown = 0;

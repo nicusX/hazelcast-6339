@@ -1,6 +1,8 @@
 package it.nicus.hazelcast6339;
 
+import static org.junit.Assert.*;
 import com.hazelcast.core.HazelcastInstance;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -10,11 +12,10 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-// The same test without calling shutdown, works
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @DirtiesContext
-public class RunTwoTestWithoutShuttingDownHazelcast_Succeeds {
+public class RunTwoTestWithoutShuttingDownHazelcast {
     static final Logger LOG = LoggerFactory.getLogger("TEST");
 
     @Autowired
@@ -23,13 +24,19 @@ public class RunTwoTestWithoutShuttingDownHazelcast_Succeeds {
     @Test
     public void test1() {
         LOG.info("Running test1");
+
+        assertNull(instance.getMap("aMap").get("foo"));
         instance.getMap("aMap").put("foo", "bar");
+        assertEquals("bar", instance.getMap("aMap").get("foo"));
     }
 
     @Test
     public void test2() {
         LOG.info("Running test2");
-        instance.getMap("aMap").put("bar", "baz");
+
+        assertNull(instance.getMap("aMap").get("foo"));
+        instance.getMap("aMap").put("foo", "baz");
+        assertEquals("baz", instance.getMap("aMap").get("foo"));
     }
 
 }
