@@ -10,10 +10,11 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+// This class with 2 test methods fails
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @DirtiesContext // Just make sure Spring is not caching the ApplicationContext
-public class Hazelcast6339Test {
+public class RunTwoTest {
 
     @After
     public void tearDownHazelcast() {
@@ -27,6 +28,7 @@ public class Hazelcast6339Test {
     public void test1() {
         instance.getMap("aMap").put("foo", "bar");
     }
+
     @Test
     public void test2() {
         instance.getMap("aMap").put("bar", "baz");
